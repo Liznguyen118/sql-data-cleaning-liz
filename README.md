@@ -79,3 +79,14 @@ CASE
 	END as new_age
 	FROM club_member_info_cleaned WHERE age > 18 or age > 90;
 ```
+#### Update database
+```SQL
+UPDATE club_member_info_cleaned
+SET age = (
+    SELECT ROUND(AVG(age))
+    FROM club_member_info_cleaned
+    WHERE age BETWEEN 18 AND 90
+)
+WHERE age < 18
+   OR age > 90;
+```
