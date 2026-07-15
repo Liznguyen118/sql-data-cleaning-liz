@@ -70,14 +70,19 @@ SELECT * FROM club_member_info_cleaned cmic WHERE age < 18 OR age > 90;
 ```
 
 In this case, I will replace the value with the average of the age column; the condition is age < 18 or age > 90. Check the condition first
-```SQL
+
+```
+SQL
 SELECT full_name, age  as old_age,
 CASE
 	WHEN age < 18 or age > 90 THEN (SELECT ROUND(AVG (age)) from club_member_info_cleaned WHERE age BETWEEN 18 AND 90)
 	ELSE age
 	END as new_age
 	FROM club_member_info_cleaned WHERE age > 18 or age > 90;
-```SQL
+```
+
+```
+SQL
 SELECT full_name, age  as old_age,
 CASE
 	WHEN age < 18 or age > 90 THEN (SELECT ROUND(AVG (age)) from club_member_info_cleaned WHERE age BETWEEN 18 AND 90)
