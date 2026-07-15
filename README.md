@@ -60,5 +60,5 @@ The result
 
 Now to the next column
 
-##Age 
+## Age 
 
