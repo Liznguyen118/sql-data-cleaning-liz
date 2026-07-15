@@ -39,3 +39,4 @@ CREATE TABLE club_member_info_cleaned (
 INSERT INTO club_member_info_cleaned 
 SELECT * FROM club_member_info;
 ```
+## Clean data
