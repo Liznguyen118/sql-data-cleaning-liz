@@ -92,7 +92,7 @@ WHERE age < 18
 ### Check the data first
 
 ```SQL
-SELECT DISTINCT cmic.martial_status  FROM club_member_info_cleaned cmic;
+SELECT DISTINCT cmic.martial_status FROM club_member_info_cleaned cmic;
 ```
 The result
 |martial_status|
@@ -104,5 +104,4 @@ The result
 |divored|
 
 Here we see **02 problems**: spelling errors in 'divored' ann NULL values. I will solve it one by one:
-
 #### For the spelling error:
