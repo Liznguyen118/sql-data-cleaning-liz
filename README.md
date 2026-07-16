@@ -105,3 +105,9 @@ The result
 
 Here we see **02 problems**: spelling errors in 'divored' ann NULL values. I will solve it one by one:
 #### For the spelling error:
+
+```SQL
+UPDATE club_member_info_cleaned  SET martial_status = 'divorced' WHERE martial_status = 'divored';
+```
+Now to the NULL values:
+#### For the NULL values:
