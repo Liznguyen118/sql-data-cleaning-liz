@@ -136,3 +136,82 @@ FROM club_member_info_cleaned;
 ```SQL
 UPDATE club_member_info_cleaned SET membership_date = TRIM(membership_date);
 ```
+## Duplicate values
+Check the duplicate values in full_name and email columns
+```SQL
+SELECT
+    LOWER(TRIM(full_name)) AS full_name_clean,
+    LOWER(TRIM(email)) AS email_clean,
+    COUNT(*) AS number_of_records
+FROM club_member_info_cleaned
+WHERE TRIM(COALESCE(full_name, '')) <> ''
+  AND TRIM(COALESCE(email, '')) <> ''
+GROUP BY
+    LOWER(TRIM(full_name)),
+    LOWER(TRIM(email))
+HAVING COUNT(*) > 1
+ORDER BY number_of_records DESC;
+```
+Then review all the duplicate values:
+```SQL
+SELECT
+    rowid,
+    *
+FROM club_member_info_cleaned
+WHERE (
+    LOWER(TRIM(full_name)),
+    LOWER(TRIM(email))
+) IN (
+    SELECT
+        LOWER(TRIM(full_name)),
+        LOWER(TRIM(email))
+    FROM club_member_info_cleaned
+    WHERE TRIM(COALESCE(full_name, '')) <> ''
+      AND TRIM(COALESCE(email, '')) <> ''
+    GROUP BY
+        LOWER(TRIM(full_name)),
+        LOWER(TRIM(email))
+    HAVING COUNT(*) > 1
+)
+ORDER BY
+    LOWER(TRIM(full_name)),
+    LOWER(TRIM(email)),
+    rowid;
+```
+
+Create the backup database:
+```SQL
+CREATE TABLE club_member_info_cleaned_backup AS
+SELECT *
+FROM club_member_info_cleaned;
+```
+
+Finally, we delete all the duplicate values:
+```SQL
+DELETE FROM club_member_info_cleaned
+WHERE rowid NOT IN (
+    SELECT MIN(rowid)
+    FROM club_member_info_cleaned
+    WHERE TRIM(COALESCE(full_name, '')) <> ''
+      AND TRIM(COALESCE(email, '')) <> ''
+    GROUP BY
+        LOWER(TRIM(full_name)),
+        LOWER(TRIM(email))
+)
+AND TRIM(COALESCE(full_name, '')) <> ''
+AND TRIM(COALESCE(email, '')) <> '';
+```
+Then check again:
+```SQL
+SELECT
+    LOWER(TRIM(full_name)) AS full_name_clean,
+    LOWER(TRIM(email)) AS email_clean,
+    COUNT(*) AS number_of_records
+FROM club_member_info_cleaned
+WHERE TRIM(COALESCE(full_name, '')) <> ''
+  AND TRIM(COALESCE(email, '')) <> ''
+GROUP BY
+    LOWER(TRIM(full_name)),
+    LOWER(TRIM(email))
+HAVING COUNT(*) > 1;
+```
