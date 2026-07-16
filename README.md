@@ -123,3 +123,16 @@ SELECT DISTINCT job_title FROM club_member_info_cleaned cmic;
 ```SQL
 UPDATE club_member_info_cleaned SET job_title = 'Unknown' WHERE job_title = '';
 ```
+## Membership_date column 
+### Check the data first
+I will check the year to see whether it has any odd values:
+
+```SQL
+SELECT DISTINCT 
+    SUBSTR(TRIM(membership_date), -4) AS membership_year
+FROM club_member_info_cleaned;
+```
+### Update the database (Remove extra spaces):
+```SQL
+UPDATE club_member_info_cleaned SET membership_date = TRIM(membership_date);
+```
