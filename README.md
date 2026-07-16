@@ -62,7 +62,7 @@ The result
 Now to the next column
 
 ## Age 
-### Check the data first
+#### Check the data first
 ```SQL
 SELECT * FROM club_member_info_cleaned cmic WHERE age < 18 OR age > 90;
 ```
