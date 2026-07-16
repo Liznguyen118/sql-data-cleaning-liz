@@ -109,5 +109,8 @@ Here we see **02 problems**: spelling errors in 'divored' ann NULL values. I wil
 ```SQL
 UPDATE club_member_info_cleaned  SET martial_status = 'divorced' WHERE martial_status = 'divored';
 ```
-Now to the NULL values:
+Now to the NULL one.
 #### For the NULL values:
+```SQL
+UPDATE club_member_info_cleaned  SET martial_status = 'Unknown' WHERE martial_status = '';
+```
