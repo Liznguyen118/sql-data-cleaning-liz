@@ -62,9 +62,7 @@ The result
 Now to the next column
 
 ## Age 
-### For column with age < 18 or age > 19
-
-Check the data first
+### Check the data first
 ```SQL
 SELECT * FROM club_member_info_cleaned cmic WHERE age < 18 OR age > 90;
 ```
