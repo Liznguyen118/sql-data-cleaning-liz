@@ -103,5 +103,6 @@ The result
 |single|
 |divored|
 
-Here we see 02 problems: spelling errors in 'divored' ann NULL values. I will solve it one by one:
-### For the spelling error:
+Here we see **02 problems**: spelling errors in 'divored' ann NULL values. I will solve it one by one:
+
+#### For the spelling error:
