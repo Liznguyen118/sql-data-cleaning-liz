@@ -61,7 +61,7 @@ The result
 
 Now to the next column
 
-## Age 
+## Age column 
 #### Check the data first
 ```SQL
 SELECT * FROM club_member_info_cleaned cmic WHERE age < 18 OR age > 90;
@@ -113,4 +113,13 @@ Now to the NULL one.
 #### For the NULL values:
 ```SQL
 UPDATE club_member_info_cleaned  SET martial_status = 'Unknown' WHERE martial_status = '';
+```
+## Job_title column
+### Check the data first
+```SQL
+SELECT DISTINCT job_title FROM club_member_info_cleaned cmic;
+```
+### Update the database (remove NULL values):
+```SQL
+UPDATE club_member_info_cleaned SET job_title = 'Unknown' WHERE job_title = '';
 ```
